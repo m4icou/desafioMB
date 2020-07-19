@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eventos.BR.Migrations
 {
     [DbContext(typeof(appContext))]
-    [Migration("20200717215058_cli_ingresso_evento")]
-    partial class cli_ingresso_evento
+    [Migration("20200719155005_testedata5")]
+    partial class testedata5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,13 +35,15 @@ namespace Eventos.BR.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sobrenome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -58,17 +60,19 @@ namespace Eventos.BR.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("fone")
-                        .HasColumnType("int");
+                    b.Property<double>("fone")
+                        .HasColumnType("float");
 
                     b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sobrenome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -88,11 +92,13 @@ namespace Eventos.BR.Migrations
                     b.Property<int?>("administradorId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("dataFim")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("dataFim")
+                        .HasColumnType("nvarchar(8)")
+                        .HasMaxLength(8);
 
-                    b.Property<DateTime>("dataInicio")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("dataInicio")
+                        .HasColumnType("nvarchar(8)")
+                        .HasMaxLength(8);
 
                     b.Property<string>("descricao")
                         .HasColumnType("nvarchar(max)");
@@ -123,8 +129,8 @@ namespace Eventos.BR.Migrations
                     b.Property<int>("eventoId")
                         .HasColumnType("int");
 
-                    b.Property<double>("preco")
-                        .HasColumnType("float");
+                    b.Property<decimal>("preco")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

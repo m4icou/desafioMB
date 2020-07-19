@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eventos.BR.Models
 {
@@ -10,11 +9,17 @@ namespace Eventos.BR.Models
     {
 
         public int Id { get; set; }
+
         public Cliente Cliente { get; set; }
         public int clienteId{ get; set; }
+
+
         public Evento Evento { get; set; }
         public int eventoId { get; set; }
-        public double preco { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal preco { get; set; }
 
     }
 }

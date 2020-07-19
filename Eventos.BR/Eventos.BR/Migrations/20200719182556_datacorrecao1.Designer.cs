@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eventos.BR.Migrations
 {
     [DbContext(typeof(appContext))]
-    [Migration("20200717211153_inicial")]
-    partial class inicial
+    [Migration("20200719182556_datacorrecao1")]
+    partial class datacorrecao1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,13 +35,15 @@ namespace Eventos.BR.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sobrenome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -58,17 +60,19 @@ namespace Eventos.BR.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("fone")
-                        .HasColumnType("int");
+                    b.Property<double>("fone")
+                        .HasColumnType("float");
 
                     b.Property<string>("nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("sobrenome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -110,11 +114,51 @@ namespace Eventos.BR.Migrations
                     b.ToTable("Eventos");
                 });
 
+            modelBuilder.Entity("Eventos.BR.Models.Ingresso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("clienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("eventoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("preco")
+                        .HasColumnType("money");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("clienteId");
+
+                    b.HasIndex("eventoId");
+
+                    b.ToTable("Ingresso");
+                });
+
             modelBuilder.Entity("Eventos.BR.Models.Evento", b =>
                 {
                     b.HasOne("Eventos.BR.Models.Administrador", "administrador")
                         .WithMany()
                         .HasForeignKey("administradorId");
+                });
+
+            modelBuilder.Entity("Eventos.BR.Models.Ingresso", b =>
+                {
+                    b.HasOne("Eventos.BR.Models.Cliente", "Cliente")
+                        .WithMany("Ingressos")
+                        .HasForeignKey("clienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Eventos.BR.Models.Evento", "Evento")
+                        .WithMany("Ingressos")
+                        .HasForeignKey("eventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

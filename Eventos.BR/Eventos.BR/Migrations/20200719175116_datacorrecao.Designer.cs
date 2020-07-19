@@ -4,14 +4,16 @@ using Eventos.BR.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Eventos.BR.Migrations
 {
     [DbContext(typeof(appContext))]
-    partial class appContextModelSnapshot : ModelSnapshot
+    [Migration("20200719175116_datacorrecao")]
+    partial class datacorrecao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace Eventos.BR.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("preco")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
